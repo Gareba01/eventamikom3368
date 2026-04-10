@@ -7,6 +7,7 @@
 * **Nama Package:** `marom/eventhub3368`
 * **Framework:** Laravel 11
 * **Repository:** `eventamikom3368`
+* **Link Laravel Cloud:** https://eventamikom3368-main-qqazh9.free.laravel.cloud/
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
