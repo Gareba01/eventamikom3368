@@ -10,6 +10,13 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
+<nav class="flex justify-center gap-4 mt-8">
+    <a href="/profil" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition shadow">Profil</a>
+    <a href="/katalog" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition shadow">Katalog</a>
+    <a href="/bantuan" class="bg-amber-500 text-white px-4 py-2 rounded-lg hover:bg-amber-600 transition shadow">Bantuan</a>
+    <a href="/kontak" class="bg-slate-700 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition shadow">Kontak</a>
+</nav>
+
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
