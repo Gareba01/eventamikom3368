@@ -153,6 +153,51 @@
             </div>
         </div>
     </section>
+
+{{-- ===== SECTION: KATEGORI ===== --}}
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-extrabold text-gray-800">Kategori Event</h2>
+            <p class="text-slate-500 mt-2">Temukan event sesuai minatmu</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            @forelse($categories as $category)
+                <div class="bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-6 text-center hover:shadow-md transition">
+                    <span class="text-indigo-700 font-bold text-lg">{{ $category->name }}</span>
+                </div>
+            @empty
+                <div class="col-span-4 text-center text-gray-400">
+                    Belum ada kategori tersedia.
+                </div>
+            @endforelse
+        </div>
+    </section>
+
+    {{-- ===== SECTION: PARTNER ===== --}}
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-extrabold text-gray-800">Partner Kami</h2>
+                <p class="text-slate-500 mt-2">Didukung oleh perusahaan-perusahaan terpercaya</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                @forelse($partners as $partner)
+                    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-center gap-3 hover:shadow-md transition">
+                        <img src="{{ $partner->logo_url }}"
+                             alt="{{ $partner->name }}"
+                             class="h-16 w-16 object-contain"
+                             onerror="this.src='https://placehold.co/64x64?text=Logo'">
+                        <span class="text-sm font-semibold text-gray-700">{{ $partner->name }}</span>
+                    </div>
+                @empty
+                    <div class="col-span-4 text-center text-gray-400">
+                        Belum ada partner tersedia.
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
     @endsection
 
 
