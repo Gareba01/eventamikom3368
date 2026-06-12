@@ -78,7 +78,7 @@
                         </p>
                     </div>
                     <div>
-                        <a href="{{ route('events.checkout') }}"
+                        <a href="{{ route('checkout.create', 1) }}"
                             class="inline-block px-10 py-5 bg-white text-indigo-600 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
                             Pesan Sekarang
                         </a>

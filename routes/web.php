@@ -22,7 +22,8 @@ Route::get('/login', function () {
 // ==========================================
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
-Route::get('/checkout', [EventController::class, 'checkout'])->name('events.checkout');
+Route::get('/checkout/{event}', [\App\Http\Controllers\CheckoutController::class, 'create'])->name('checkout.create');
+Route::post('/checkout/{event}', [\App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
 Route::get('/ticket', [EventController::class, 'ticket'])->name('tickets.index');
 
 Route::get('/tentang', function () {
@@ -59,6 +60,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // 4. Kelola Partner
         Route::resource('partners', PartnerController::class);
+
+        // 5. Laporan Transaksi
+        Route::get('transactions', [\App\Http\Controllers\Admin\TransactionController::class, 'index'])->name('transactions.index');
 
     });
 

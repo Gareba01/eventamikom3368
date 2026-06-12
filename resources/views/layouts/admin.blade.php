@@ -35,8 +35,7 @@
                     Kelola Partner
                 </a>
             
-            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-indigo-800 rounded-xl font-bold transition">
-                Laporan Transaksi
+<a href="{{ route('admin.transactions.index') }}" class="flex items-center gap-3 px-4 py-3 hover:bg-indigo-800 rounded-xl font-bold transition">                Laporan Transaksi
             </a>
         </nav>
         <div class="pt-6 border-t border-indigo-800">
