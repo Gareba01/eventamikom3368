@@ -7,9 +7,15 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\WelcomeController;
 
 // Admin Controllers
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\EventController as EventAdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PartnerController;
+
+// Redirect login bawaan ke halaman login admin
+Route::get('/login', function () {
+    return redirect()->route('admin.login');
+})->name('login');
 
 // ==========================================
 // ROUTE PUBLIK (Pengguna Biasa)
@@ -32,18 +38,28 @@ Route::get('/bantuan', function () { return view('bantuan'); });
 // ==========================================
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    // 1. Dashboard Admin
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    // Rute Login bebas akses
+    Route::get('login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('login', [AuthController::class, 'login'])->name('login.post');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-    // 2. Kelola Event
-    Route::resource('events', EventAdminController::class);
+    // Mengamankan Route Administrasi di balik tembok (Middleware)
+    Route::middleware(['auth', 'admin'])->group(function () {
 
-    // 3. Kelola Kategori
-    Route::resource('categories', CategoryController::class);
+        // 1. Dashboard Admin
+        Route::get('/', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
 
-    // 4. Kelola Partner
-    Route::resource('partners', PartnerController::class);
+        // 2. Kelola Event
+        Route::resource('events', EventAdminController::class);
+
+        // 3. Kelola Kategori
+        Route::resource('categories', CategoryController::class);
+
+        // 4. Kelola Partner
+        Route::resource('partners', PartnerController::class);
+
+    });
 
 });
