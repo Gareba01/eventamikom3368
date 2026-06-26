@@ -26,6 +26,10 @@ Route::get('/checkout/{event}', [\App\Http\Controllers\CheckoutController::class
 Route::post('/checkout/{event}', [\App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
 Route::get('/ticket', [EventController::class, 'ticket'])->name('tickets.index');
 
+// Rute Pembayaran & Sukses Midtrans yang dipindahkan ke area Publik
+Route::get('/payment/{order_id}', [\App\Http\Controllers\CheckoutController::class, 'payment'])->name('checkout.payment');
+Route::get('/success/{order_id}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('checkout.success');
+
 Route::get('/tentang', function () {
     return '<h1>Ini adalah Halaman Tentang Aplikasi Event Hub (Running on Mac)</h1>';
 });
@@ -63,7 +67,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // 5. Laporan Transaksi
         Route::get('transactions', [\App\Http\Controllers\Admin\TransactionController::class, 'index'])->name('transactions.index');
-
     });
 
 });
