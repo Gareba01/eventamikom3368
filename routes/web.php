@@ -11,17 +11,21 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\EventController as EventAdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\DashboardController;
 
 // Redirect login bawaan ke halaman login admin
 Route::get('/login', function () {
     return redirect()->route('admin.login');
 })->name('login');
 
+// Webhook Midtrans (dipanggil server Midtrans, bukan browser user)
+Route::post('/midtrans/callback', [\App\Http\Controllers\MidtransWebhookController::class, 'handle']);
+
 // ==========================================
 // ROUTE PUBLIK (Pengguna Biasa)
 // ==========================================
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
-Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
+Route::get('/event/{event}', [EventController::class, 'show'])->name('events.show');
 Route::get('/checkout/{event}', [\App\Http\Controllers\CheckoutController::class, 'create'])->name('checkout.create');
 Route::post('/checkout/{event}', [\App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
 Route::get('/ticket', [EventController::class, 'ticket'])->name('tickets.index');
@@ -52,9 +56,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth', 'admin'])->group(function () {
 
         // 1. Dashboard Admin
-        Route::get('/', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         // 2. Kelola Event
         Route::resource('events', EventAdminController::class);
